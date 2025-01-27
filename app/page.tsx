@@ -1,7 +1,7 @@
 "use client"
 
 import {useEffect, useState} from "react";
-import {motion} from "framer-motion";
+import {AnimatePresence,motion} from "framer-motion";
 import {Montserrat} from "next/font/google"
 import Table from "@/components/table";
 import {bytesToHex, floatToHex, hexToBytes, hexToFloat, isDecimal, isHexadecimal} from "@/utils/convertValue";
