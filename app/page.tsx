@@ -1,7 +1,7 @@
 "use client"
 
 import {useEffect, useState} from "react";
-import {AnimatePresence,motion} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
 import {Montserrat} from "next/font/google"
 import Table from "@/components/table";
 import {bytesToHex, floatToHex, hexToBytes, hexToFloat, isDecimal, isHexadecimal} from "@/utils/convertValue";
@@ -15,7 +15,7 @@ const MontserratFont = Montserrat({
 
 export default function Page() {
 
-    const [options, setOptions] = useState<any>({type: null, method: null});
+    const [options, setOptions] = useState({type: 0, method: 0});
     const [inputValue, setInputValue] = useState('');
     const [resultValue, setResultValue] = useState({
         byte: '????????',
@@ -57,14 +57,14 @@ export default function Page() {
         }
 
         function openCondition() {
-            if (options.type == '1') {
-                setOpen({...options, byte: true});
-            } else if (options.type == '2') {
-                setOpen({...options, twoBytes: true});
-            } else if (options.type == '3') {
-                setOpen({...options, fourBytes: true});
-            } else if (options.type == '4') {
-                setOpen({...options, float: true});
+            if (options.type == 1) {
+                setOpen({...open, byte: true});
+            } else if (options.type == 2) {
+                setOpen({...open, twoBytes: true});
+            } else if (options.type == 3) {
+                setOpen({...open, fourBytes: true});
+            } else if (options.type == 4) {
+                setOpen({...open, float: true});
             } else {
                 setOpen({byte: true, twoBytes: true, fourBytes: true, float: true});
             }
@@ -74,13 +74,13 @@ export default function Page() {
 
         if (inputValue == '') {
             toast.error('Input Masih Kosong', classNameToastWarning)
-        } else if (options.type == '0' || options.method == '0') {
+        } else if (options.type == 0 || options.method == 0) {
             toast.error('silahkan pilih type value dan convert mode', classNameToastWarning)
-        } else if (options.method == '1' && isDecimal(inputValue) == false) {
+        } else if (options.method == 1 && isDecimal(inputValue) == false) {
             toast.error('value yg dimasukan bukan value decimal', classNameToastWarning)
-        } else if (options.method == '2' && isHexadecimal('0x' + inputValue) == false) {
+        } else if (options.method == 2 && isHexadecimal('0x' + inputValue) == false) {
             toast.error('value yg dimasukan bukan value hexadecimal', classNameToastWarning)
-        } else if (options.method == '1') {
+        } else if (options.method == 1) {
             setResultValue({
                 byte: '0'.repeat(Looping(2)) + bytesToHex(inputValue).slice(-2),
                 twoBytes: '0'.repeat(Looping(4)) + bytesToHex(inputValue).slice(-4),
@@ -88,7 +88,7 @@ export default function Page() {
                 float: floatToHex(inputValue) == "NaN" ? '????????' : floatToHex(inputValue)
             });
             openCondition();
-        } else if (options.method == '2') {
+        } else if (options.method == 2) {
             setResultValue({
                 byte: String(hexToBytes(inputValue)),
                 twoBytes: String(hexToBytes(inputValue)),
