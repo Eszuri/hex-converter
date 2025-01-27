@@ -1,12 +1,11 @@
 "use client"
 
 import {useEffect, useState} from "react";
-import {AnimatePresence, motion} from "framer-motion";
+import {motion} from "framer-motion";
 import {Montserrat} from "next/font/google"
 import Table from "@/components/table";
 import {bytesToHex, floatToHex, hexToBytes, hexToFloat, isDecimal, isHexadecimal} from "@/utils/convertValue";
 import {toast, Toaster} from "sonner";
-import Loader from "@/components/loaders";
 
 
 const MontserratFont = Montserrat({
